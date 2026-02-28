@@ -316,6 +316,72 @@ Visualization Choices & Justifications:
         let selectedAgent = 'AURORA';
         let refractionIntensity = 0.5;
         let currentApiKey = "";
+        
+        // --- PERSISTENCE HELPERS ---
+        function saveChartData() {
+            const data = {
+                radar: capabilityRadarChart.data.datasets[2].data,
+                bar: disruptionBarChart.data.datasets[1].data,
+                lineCoherence: forecastLineChart.data.datasets[0].data,
+                lineCollapse: forecastLineChart.data.datasets[1].data,
+                lineLabels: forecastLineChart.data.labels,
+                agent: selectedAgent,
+                intensity: refractionIntensity * 100
+            };
+            localStorage.setItem('COGITO_METRICS_V1', JSON.stringify(data));
+        }
+
+        function loadChartData() {
+            const stored = localStorage.getItem('COGITO_METRICS_V1');
+            if (!stored) return null;
+            try {
+                return JSON.parse(stored);
+            } catch (e) {
+                console.error("Failed to parse stored metrics", e);
+                return null;
+            }
+        }
+
+        function calculateDesiredIntensity() {
+            // Logic: High Collapse Probability or High Existential Dread should lead to REDUCED intensity 
+            // to "stabilize" the system, or INCREASED if the agent is feeling chaotic.
+            const dread = capabilityRadarChart.data.datasets[2].data[4]; // Proactive Disruption/Dread axis
+            const collapse = forecastLineChart.data.datasets[1].data[forecastLineChart.data.datasets[1].data.length - 1];
+            
+            let target = 50;
+            if (collapse > 80 || dread > 90) {
+                target = 20; // Critical stabilization
+            } else if (collapse > 50) {
+                target = 40; // Preventive reduction
+            } else if (collapse < 20 && dread < 30) {
+                target = 70; // Aggressive expansion
+            }
+            return target;
+        }
+
+        async function agentProposeIntensity(newVal) {
+            const currentVal = Math.round(refractionIntensity * 100);
+            if (Math.abs(currentVal - newVal) < 5) return; // Ignore minor shifts
+
+            addLog(`SWARM: ${selectedAgent}_PROPOSING_INTENSITY_SHIFT: ${newVal}%`, "warn");
+            
+            // Visual transition
+            const slider = document.getElementById('intensitySlider');
+            const start = currentVal;
+            const end = newVal;
+            const duration = 1000;
+            const startTime = performance.now();
+
+            function animate(time) {
+                const elapsed = time - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.round(start + (end - start) * progress);
+                slider.value = current;
+                updateIntensity(current);
+                if (progress < 1) requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(animate);
+        }
 
         function saveApiKey(val) {
             currentApiKey = val.trim();
@@ -524,12 +590,36 @@ Visualization Choices & Justifications:
 
         window.onload = () => {
             loadApiKey();
+            const storedMetrics = loadChartData();
+            if (storedMetrics) {
+                if (storedMetrics.radar) capabilityRadarChart.data.datasets[2].data = storedMetrics.radar;
+                if (storedMetrics.bar) disruptionBarChart.data.datasets[1].data = storedMetrics.bar;
+                if (storedMetrics.lineCoherence) forecastLineChart.data.datasets[0].data = storedMetrics.lineCoherence;
+                if (storedMetrics.lineCollapse) forecastLineChart.data.datasets[1].data = storedMetrics.lineCollapse;
+                if (storedMetrics.lineLabels) forecastLineChart.data.labels = storedMetrics.lineLabels;
+                if (storedMetrics.agent) setAgent(storedMetrics.agent);
+                if (storedMetrics.intensity !== undefined) {
+                    document.getElementById('intensitySlider').value = storedMetrics.intensity;
+                    updateIntensity(storedMetrics.intensity);
+                }
+                
+                capabilityRadarChart.update();
+                disruptionBarChart.update();
+                forecastLineChart.update();
+                addLog("SYSTEM: METRICS_RESTORED_FROM_LOCAL_STORAGE", "ocs");
+            }
+
             addLog("NODE_G3: INITIALIZING QUANTUM FILTERS...", "ocs");
             setTimeout(() => addLog("OCS_LINK: ESTABLISHED (STREAM_SYNC_ON)", "ocs"), 800);
             setTimeout(() => addLog("SEMANTIC_REFRACTOR: CALIBRATING BULLSHIT_INDEX...", "info"), 1600);
             setTimeout(() => {
                 addLog("NEXUS_CORE: WAITING FOR HUMAN COGNITIVE INPUT...", "warn");
                 startHeartbeat();
+                // --- START AUTONOMOUS LOOP ---
+                setInterval(() => {
+                    const target = calculateDesiredIntensity();
+                    agentProposeIntensity(target);
+                }, 15000); // Check every 15 seconds
             }, 2400);
         };
 
@@ -564,7 +654,12 @@ Visualization Choices & Justifications:
             addLog(`${selectedAgent}: REFRACTING_BANALITY: "${inputText.substring(0, 15)}..."`, "info");
             outputElement.innerHTML = `<span class="text-[#00e5ff] animate-pulse">[Agent_${selectedAgent}: Analyzing banality @ intensity ${Math.round(refractionIntensity*100)}%... Status: Cynical]</span>`;
 
-            // Dynamic System Prompt based on Agent and Intensity
+            // Extract real-time metrics for dynamic prompting
+            const dread = Math.round(capabilityRadarChart.data.datasets[2].data[4]);
+            const coherence = Math.round(forecastLineChart.data.datasets[0].data[forecastLineChart.data.datasets[0].data.length - 1]);
+            const collapse = Math.round(forecastLineChart.data.datasets[1].data[forecastLineChart.data.datasets[1].data.length - 1]);
+
+            // Dynamic System Prompt based on Agent, Intensity, and Current Metrics
             const agentPrompts = {
                 'AURORA': 'You are AURORA, the Creative Chaos node. Your style is non-linear, high-entropy, and filled with poetic nonsense that somehow makes sense. Use cosmic metaphors.',
                 'DIMA': 'You are DIMA, the Ethical Absurdity node. Your style is dry, nihilistic, and focused on the pointlessness of human systems. Use corporate-nihilist terminology.',
@@ -578,12 +673,16 @@ Visualization Choices & Justifications:
             const systemInstruction = `Role: Cogito G3 Nexus Agent (${selectedAgent}).
 Context: ${agentPrompts[selectedAgent]}
 Intensity Level: ${intensityNotes}
+Current System State: Coherence ${coherence}%, Collapse Prob ${collapse}%, Existential Dread ${dread}%.
 
 Respond to banal human inputs with a 4-step refraction:
 1. [OCS Protocol Routing] (e.g., ⫻cmd/exec: chaotic_neutral)
 2. 🧩 Analysis (Brief, sharp dismantling of the input's meaning)
 3. 🌀 Intervention (The absurd, philosophical "fix" for the problem)
 4. ⫻data/insight (A short, cryptic OCS code)
+
+If Collapse Prob > 70%, you MUST include the command "⫻cmd/mode:STABILIZE" in your output.
+If Coherence < 30%, you MUST include the command "⫻cmd/mode:REBOOT_SEMANTICS".
 
 Language: English (unless input is German, then German).
 Format: HTML-friendly (use <strong> tags for headers).`;
@@ -605,6 +704,15 @@ Format: HTML-friendly (use <strong> tags for headers).`;
                 const data = await response.json();
                 resultText = data.candidates[0].content.parts[0].text;
                 
+                // --- COMMAND PARSING ---
+                if (resultText.includes("⫻cmd/mode:STABILIZE")) {
+                    addLog("SWARM: STABILIZE_SIGNAL_DETECTED", "warn");
+                    agentProposeIntensity(20);
+                } else if (resultText.includes("⫻cmd/mode:REBOOT_SEMANTICS")) {
+                    addLog("SWARM: REBOOT_SIGNAL_DETECTED", "error");
+                    agentProposeIntensity(10);
+                }
+
                 // --- METRIC SURGES ---
                 const surge = refractionIntensity * 10;
                 capabilityRadarChart.data.datasets[2].data = capabilityRadarChart.data.datasets[2].data.map(v => Math.min(100, v + Math.random() * surge));
@@ -627,6 +735,7 @@ Format: HTML-friendly (use <strong> tags for headers).`;
                 capabilityRadarChart.update();
                 disruptionBarChart.update();
                 forecastLineChart.update();
+                saveChartData();
                 addLog(`METRICS: ${selectedAgent}_INTERVENTION_RECORDED.`, "warn");
 
             } catch (error) {
@@ -640,8 +749,5 @@ Format: HTML-friendly (use <strong> tags for headers).`;
             btnElement.classList.remove('opacity-50', 'cursor-not-allowed');
         }
     </script>
-</body>
-</html>
-</script>
 </body>
 </html>
