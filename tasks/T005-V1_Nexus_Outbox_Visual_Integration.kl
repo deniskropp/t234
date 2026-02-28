@@ -1,0 +1,31 @@
+---
+id: T005-V1
+title: Cogito G3: Nexus Outbox Visual Integration
+author: AR-00L
+recipient: AR-00L
+status: OPEN
+priority: HIGH
+created: 2026-02-28
+---
+
+# Context
+With the "Cybernetic Neon Night" hero background integrated and icons generated (T005), the Cogito G3 dashboard requires a dedicated visual section for the "Nexus Outbox" (Mock External API Sink). This section must display active interventions with high-fidelity icons and glowing status indicators.
+
+# Objectives
+1. [ ] **Outbox Container**: Implement a new section "7. Nexus Outbox: External Interventions" in `index.html`.
+2. [ ] **Icon Integration**: Use the generated icons (`jira_hijack.webp`, `slack_interference.webp`, `email_refraction.webp`) for the respective intervention types.
+3. [ ] **Glow & Animation**: Add a pulse animation and neon glow to the icons when an intervention is "Active" or "Transmitting."
+4. [ ] **Grid Layout**: Use a responsive grid or Flexbox to display the intervention cards, ensuring they match the `#1a2235` card style with `#00e5ff` or `#f000ff` borders.
+
+# Constraints
+- **NO SVG**.
+- **NO Mermaid JS**.
+- Adhere to the palette: #0b0f19, #00e5ff, #f000ff, #b100ff, #ffea00.
+- Icons must be sized consistently (e.g., 48x48px or 64x64px).
+
+# Resources
+- `index.html`
+- `assets/jira_hijack.webp`
+- `assets/slack_interference.webp`
+- `assets/email_refraction.webp`
+- `tasks/T005_OCS_Swarm_Intelligence_Scaling.kl` (Parent)
