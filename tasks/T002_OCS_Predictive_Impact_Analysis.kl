@@ -1,0 +1,26 @@
+---
+id: T002
+title: Cogito G3: Predictive Impact & Intensity Control
+author: Gemini CLI
+recipient: Orchestrator
+status: IN_PROGRESS
+---
+
+# Context
+Following the successful swarm expansion (T001), the Cogito G3 dashboard requires deeper analytical capabilities and user control over the semantic refraction process. The "Systemic Collapse Forecast" and "Refraction Intensity" are critical for assessing long-term impact.
+
+# Objectives
+1. [x] **Refraction Intensity Control**: Implement a slider in `index.html` to adjust `refractionIntensity` (0.0 to 1.0).
+2. [x] **Agent Specialization**: Update `refractSemantics` to allow selection of OCS agent (AURORA, DIMA, KODAX) with distinct system prompts.
+3. [x] **Predictive Impact Analysis**: Add a Line Chart (Chart.js) visualizing "Systemic Collapse Forecast" over time, reacting to intervention frequency and intensity.
+4. [x] **Visual Glitch Effects**: Integrate subtle CSS/JS "glitch" animations that scale with refraction intensity.
+
+# Constraints
+- **NO SVG**.
+- **NO Mermaid JS**.
+- Adhere to the palette: #0b0f19, #00e5ff, #f000ff, #b100ff, #ffea00.
+- Use **Chart.js** for the new line chart.
+
+# Resources
+- `index.html`
+- `output/system_suggestions.md`
