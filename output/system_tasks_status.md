@@ -12,7 +12,7 @@
 | STRAT_G3 | Strategic Evolution Roadmap | ACTIVE | HIGH |
 
 ## Roadmap Progress (PROPOSED Tasks)
-- **T007: Quantum Semantic Containment**: Pending implementation of entropy monitoring.
-- **T008: Protocol Upgrade (v2.2)**: Pending transition to nested recursive reasoning traces.
-- **T009: Swarm Connection Matrix**: Pending 3D/multivariate visualization deployment.
-- **T010: Nexus Outbox Webhook Proxy**: Pending transition from mock UI to functional middleware.
+- **T007: Quantum Semantic Containment**: Pending implementation of entropy monitoring in JS.
+- **T008: Protocol Upgrade (v2.2)**: Transitioning to JS-based recursive reasoning traces.
+- **T009: Swarm Connection Matrix**: Pending Bubble/Scatter plot deployment in Chart.js.
+- **T010: Nexus Outbox Webhook Proxy**: **ACTIVE PRIORITY**. Replacing mock UI with functional JS `fetch()` dispatcher.
