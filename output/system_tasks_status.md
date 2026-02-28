@@ -7,7 +7,8 @@
 | T003 | Autonomous Feedback Loops | COMPLETE | HIGH |
 | T004 | Autonomous Feedback Execution | COMPLETE | HIGH |
 | T005 | Swarm Intelligence Scaling | COMPLETE | HIGH |
-| T005-V1 | Nexus Outbox Visual Integration | OPEN | HIGH |
+| T005-V1 | Nexus Outbox Visual Integration | COMPLETE | HIGH |
+| T010 | Nexus Outbox Functional Proxy (v2.2) | PROPOSED | HIGH |
 | STRAT_G3 | Strategic Evolution Roadmap | ACTIVE | HIGH |
 
 ## Roadmap Progress (PROPOSED Tasks)

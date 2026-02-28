@@ -1,0 +1,30 @@
+---
+id: T010
+title: Cogito G3: Nexus Outbox Functional Proxy (v2.2)
+author: Gemini CLI
+recipient: Orchestrator
+status: PROPOSED
+priority: HIGH
+created: 2026-02-28
+---
+
+# Context
+The Cogito G3 system currently features a visually integrated "Nexus Outbox" that mocks external interventions. To achieve the "Strategic Evolution" (STRAT_G3), this component must transition from a static UI log to a functional **Webhook Dispatcher** using JavaScript/TypeScript. This will enable the G3 agents (AURORA, DIMA, KODAX) to broadcast `⫻data/insight` to actual (or simulated) enterprise endpoints.
+
+# Objectives
+1. [ ] **Webhook Configuration (YAML/JSON)**: Create a structured `endpoints.yaml` or `endpoints.json` to define the target URLs, headers, and authentication tokens for external services (Mock Jira, Slack, MS Teams).
+2. [ ] **JS Webhook Dispatcher**: Implement a `WebhookDispatcher` class in `index.html` that utilizes the browser's `fetch()` API to send asynchronous POST requests containing the refracted `⫻data/insight`.
+3. [ ] **Real-time Status Tracking**: Update the "Nexus Outbox" UI to visualize the live HTTP status (e.g., `200 OK`, `404 NOT_FOUND`, `500 ERROR`) of each intervention event.
+4. [ ] **Retry Logic (Chronos)**: Integrate the **Chronos** node to manage exponential backoff and retries for failed webhook transmissions, preventing "Intervention Loss" during network instability.
+5. [ ] **Synapse Integration**: Ensure that the success or failure of a dispatch is recorded in the `sharedSemanticContext` (Synapse memory) to inform future agent interventions.
+
+# Constraints
+- **Stack**: Strictly JavaScript (ES6+), TypeScript, YAML, or JSON.
+- **Protocol**: Adhere to OCS v2.2 `⫻cmd/broadcast` and `⫻data/event` schemas.
+- **Aesthetic**: Maintain the "Cybernetic Neon Night" UI consistency.
+- **No External Libraries**: Use native `fetch()` and Chart.js only.
+
+# Resources
+- `index.html`
+- `files/ocs-proto.md`
+- `tasks/T005_OCS_Swarm_Intelligence_Scaling.kl`
