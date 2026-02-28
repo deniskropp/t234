@@ -1,0 +1,32 @@
+---
+id: T003
+title: Cogito G3: Autonomous Feedback Loops
+author: Gemini CLI
+recipient: Orchestrator
+status: OPEN
+priority: HIGH
+created: 2026-02-28
+---
+
+# Context
+The Cogito G3 platform has successfully integrated multi-agent swarm logic (T001) and manual intensity controls with predictive impact analysis (T002). API key support is now handled via local storage in the UI. To achieve true agentic autonomy, the system must now implement closed-loop feedback where the agents can self-regulate based on performance metrics.
+
+# Objectives
+1. [ ] **Self-Adjusting Refraction**: Implement logic in `index.html` where agents (AURORA, DIMA, KODAX) can propose a change to the `refractionIntensity` based on the "Existential Dread" and "Collapse Probability" metrics.
+2. [ ] **Dynamic System Prompting**: Update the Gemini API call to include current metric states, allowing the model to "reason" about its own intensity level.
+3. [ ] **Recursive Intervention**: Create a mechanism where a "High Existential Dread" event triggers an automatic, unprompted intervention from DIMA or KODAX.
+4. [ ] **Metric Persistence**: Implement a basic state preservation (localStorage) for the Forecast and Impact charts so they persist across sessions.
+
+# Constraints
+- **NO SVG**.
+- **NO Mermaid JS**.
+- Adhere to the palette: #0b0f19, #00e5ff, #f000ff, #b100ff, #ffea00.
+- Maintain OCS v2.1 protocol syntax in logs and outputs.
+
+# Resources
+- `index.html`
+- `files/ocs-proto.md`
+- `tasks/T002_OCS_Predictive_Impact_Analysis.kl` (Reference)
+
+# Handoff Note
+The runtime error regarding the API key has been resolved. The next orchestrator should focus on the "Autonomous Feedback" logic. T002 is functionally complete but needs a final status flip to COMPLETE after verifying the T003 transition.

@@ -15,3 +15,7 @@ Conceptual single-page visualization for the Cogito G3 agentic transformation.
 - **Modifications**: Edit `index.html` directly. Static assets only.
 - **Visuals**: Maintain the high-contrast neon-on-dark theme.
 - **Charts**: Update Radar, Bar, and Donut configs in the `<script>` section for data changes.
+
+
+## System/Protocol/Prompts/Workflows
+@files/system.md
