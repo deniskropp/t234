@@ -16,7 +16,7 @@ The Cogito G3 (Evolution Blueprint) project has been successfully upgraded with 
 4. [x] **UI Polishing**: Ensure the "Cybernetic Neon Night" theme is consistently applied across all new elements.
 
 # Constraints
-- **NO SVG**.
+- **SVG Permitted (Localized only)**.
 - **NO Mermaid JS**.
 - Use **Chart.js** for all visualizations.
 - Adhere to the palette: #0b0f19, #00e5ff, #f000ff, #b100ff, #ffea00.

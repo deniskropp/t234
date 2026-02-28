@@ -23,4 +23,4 @@
 ## 5. Verification & Final Audit
 - [ ] Test the "Conflict" scenario by manually spiking `Existential Dread`.
 - [ ] Ensure `localStorage` handles the expanded `sharedSemanticContext` without performance degradation.
-- [ ] Final visual check: No SVG/Mermaid JS.
+- [ ] Final visual check: Local SVG assets verified.

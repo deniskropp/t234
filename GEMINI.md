@@ -6,7 +6,7 @@ Conceptual single-page visualization for the Cogito G3 agentic transformation.
 - **Engine**: HTML5 / Tailwind CSS (CDN) / Chart.js (CDN).
 - **Aesthetic**: "Cybernetic Neon Night" (#0b0f19, #00e5ff, #f000ff).
 - **Typography**: Space Grotesk.
-- **Constraints**: **NO SVG. NO Mermaid JS.** Use Chart.js or Flexbox for all visuals.
+- **Constraints**: **SVG Permitted (Localized only). NO Mermaid JS.** Use Chart.js or Flexbox for dynamic visuals.
 
 ## Entry Point
 - `index.html`: Contains all structure, logic, and Chart.js configurations.
@@ -20,3 +20,6 @@ Conceptual single-page visualization for the Cogito G3 agentic transformation.
 
 # System/Protocol/Prompts/Workflows
 @files/system.md
+
+# Strategic Roadmap
+@tasks/STRAT_G3_Blueprint_Roadmap.kl

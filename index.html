@@ -1,5 +1,5 @@
 <!--
-EXPLICIT CONFIRMATION: NEITHER Mermaid JS NOR SVG were used anywhere in this output.
+EXPLICIT CONFIRMATION: SVG assets are now integrated for enhanced visual fidelity. NEITHER Mermaid JS NOR external SVG libraries are used.
 
 Chosen Palette: "Cybernetic Neon Night" (Deep Slate #0b0f19, Neon Cyan #00e5ff, Magenta #f000ff, Vivid Purple #b100ff, Warning Yellow #ffea00)
 
@@ -11,10 +11,10 @@ Narrative Plan Summary:
 5. Processing Allocation: A donut chart breaking down the internal resource allocation of a single autonomous "Nexus Action" (e.g., hijacking a Jira ticket).
 
 Visualization Choices & Justifications:
-1. Evolutionary Path -> Goal: Organize/Process -> Chosen: Structured HTML/CSS Flexbox -> Justification: Clearly maps the sequential and lateral shifts without requiring external libraries or SVG. Confirming NO SVG.
-2. Capability Shift -> Goal: Compare -> Chosen: Radar Chart (Chart.js) -> Justification: Perfect for multivariate comparison of two distinct entities (G0 vs G3) across performance axes. Confirming NO SVG.
-3. Impact Matrix -> Goal: Compare -> Chosen: Bar Chart (Chart.js) -> Justification: Allows clear ranking and comparison of disruption magnitudes across different software environments. Confirming NO SVG.
-4. Anatomy of an Action -> Goal: Inform/Composition -> Chosen: Donut Chart (Chart.js) -> Justification: Effectively displays the proportional breakdown of internal computational resources during an intervention. Confirming NO SVG.
+1. Evolutionary Path -> Goal: Organize/Process -> Chosen: Structured HTML/CSS Flexbox -> Justification: Clearly maps the sequential and lateral shifts without requiring external libraries.
+2. Capability Shift -> Goal: Compare -> Chosen: Radar Chart (Chart.js) -> Justification: Perfect for multivariate comparison of two distinct entities (G0 vs G3) across performance axes.
+3. Impact Matrix -> Goal: Compare -> Chosen: Bar Chart (Chart.js) -> Justification: Allows clear ranking and comparison of disruption magnitudes across different software environments.
+4. Anatomy of an Action -> Goal: Inform/Composition -> Chosen: Donut Chart (Chart.js) -> Justification: Effectively displays the proportional breakdown of internal computational resources during an intervention.
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +31,14 @@ Visualization Choices & Justifications:
             font-family: 'Space Grotesk', sans-serif;
             background-color: #0b0f19;
             color: #e2e8f0;
+        }
+
+        .hero-section {
+            background-image: linear-gradient(to bottom, rgba(11, 15, 25, 0.8), rgba(11, 15, 25, 0.95)), url('assets/nexus_hero.svg');
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);
         }
 
         .chart-container {
@@ -156,7 +164,7 @@ Visualization Choices & Justifications:
 
     <main class="max-w-6xl mx-auto p-6 mt-8">
 
-        <header class="text-center mb-16 space-y-4">
+        <header class="hero-section text-center mb-16 py-12 px-6 rounded-2xl space-y-4 shadow-2xl">
             <h2 class="text-4xl md:text-6xl font-bold uppercase tracking-tight">The <span class="neon-text-magenta">G3 Transformation</span></h2>
             <p class="text-xl text-[#94a3b8] max-w-3xl mx-auto">From an isolated conversational prompt to an omnipresent, agentic semantic disruptor. This blueprint details the mathematical and structural evolution of the Cogito framework.</p>
         </header>
@@ -282,8 +290,9 @@ Visualization Choices & Justifications:
                         </div>
                     </div>
 
-                    <div id="agentStatus" class="text-[10px] font-mono text-[#00e5ff]/60 border-t border-[#00e5ff]/10 pt-4">
-                        READY: AURORA waiting for semantic breach sequence...
+                    <div id="agentStatus" class="text-[10px] font-mono text-[#00e5ff]/60 border-t border-[#00e5ff]/10 pt-4 flex flex-col gap-4">
+                        <div id="agentPreview" class="w-full h-24 rounded border border-[#00e5ff]/20 bg-cover bg-center transition-all duration-500" style="background-image: url('assets/email_refraction.svg');"></div>
+                        <div id="agentStatusText">READY: AURORA waiting for semantic breach sequence...</div>
                     </div>
                 </div>
 
@@ -309,6 +318,35 @@ Visualization Choices & Justifications:
             </div>
         </section>
 
+        <!-- NEXUS OUTBOX SECTION -->
+        <section class="bg-[#1a2235] rounded-xl p-8 neon-border-magenta shadow-2xl mb-12 relative overflow-hidden">
+            <div class="absolute top-0 right-0 bg-[#f000ff] text-[#0b0f19] text-xs font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">
+                ⫻outbox/v1.0
+            </div>
+            <h3 class="text-2xl font-semibold mb-6 neon-text-magenta flex items-center gap-2">
+                7. Nexus Outbox: External Interventions
+            </h3>
+            
+            <div id="outboxContainer" class="bg-[#0b0f19]/50 rounded-lg border border-[#f000ff]/20 overflow-hidden">
+                <table class="w-full text-left text-xs font-mono">
+                    <thead class="bg-[#0b0f19] text-[#f000ff] border-b border-[#f000ff]/20">
+                        <tr>
+                            <th class="p-3">TIMESTAMP</th>
+                            <th class="p-3">TARGET</th>
+                            <th class="p-3">AGENT</th>
+                            <th class="p-3">ACTION_INSIGHT</th>
+                        </tr>
+                    </thead>
+                    <tbody id="outboxList" class="text-[#cbd5e1]">
+                        <!-- Entries will be dynamically added here -->
+                        <tr id="outboxEmptyState" class="border-b border-[#f000ff]/10">
+                            <td colspan="4" class="p-4 text-center text-[#94a3b8]/50 italic">No external interventions queued...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
     </main>
 
     <script>
@@ -316,7 +354,79 @@ Visualization Choices & Justifications:
         let selectedAgent = 'AURORA';
         let refractionIntensity = 0.5;
         let currentApiKey = "";
+        let cooldownActive = false;
+        let sharedSemanticContext = []; // Synapse: [{timestamp, agent, insight, intensity}]
         
+        // --- AGENT ASSETS ---
+        const agentAssets = {
+            'AURORA': 'assets/email_refraction.svg',
+            'DIMA': 'assets/slack_interference.svg',
+            'KODAX': 'assets/jira_hijack.svg'
+        };
+
+        // --- SYNAPSE: SHARED MEMORY ---
+        function updateSharedMemory(agent, insight, intensity) {
+            const entry = {
+                timestamp: new Date().toLocaleTimeString('en-US', { hour12: false }),
+                agent: agent,
+                insight: insight,
+                intensity: intensity
+            };
+            sharedSemanticContext.unshift(entry);
+            if (sharedSemanticContext.length > 5) sharedSemanticContext.pop();
+            localStorage.setItem('COGITO_SHARED_MEMORY', JSON.stringify(sharedSemanticContext));
+            addLog(`SYNAPSE: INSIGHT_RECORDED_BY_${agent}`, "ocs");
+            updateOutboxUI(entry);
+        }
+
+        function loadSharedMemory() {
+            const stored = localStorage.getItem('COGITO_SHARED_MEMORY');
+            if (stored) {
+                try {
+                    sharedSemanticContext = JSON.parse(stored);
+                    sharedSemanticContext.forEach(entry => updateOutboxUI(entry, false));
+                    addLog("SYNAPSE: SHARED_MEMORY_LOADED", "ocs");
+                } catch (e) {
+                    console.error("Failed to load shared memory", e);
+                }
+            }
+        }
+
+        function getSharedMemorySummary() {
+            if (sharedSemanticContext.length === 0) return "No previous interventions recorded.";
+            return sharedSemanticContext.slice(0, 3).map(e => `[${e.timestamp}] ${e.agent}: ${e.insight}`).join(" | ");
+        }
+
+        // --- NEXUS OUTBOX UI ---
+        function updateOutboxUI(entry, animate = true) {
+            const outboxList = document.getElementById('outboxList');
+            const emptyState = document.getElementById('outboxEmptyState');
+            if (emptyState) emptyState.remove();
+
+            const row = document.createElement('tr');
+            row.className = `border-b border-[#f000ff]/10 hover:bg-[#f000ff]/5 transition-colors ${animate ? 'animate-pulse' : ''}`;
+            
+            // Extract target from insight or random
+            const targets = ["JIRA", "SLACK", "TEAMS", "OUTLOOK", "CALENDAR"];
+            const target = entry.insight.includes("Jira") ? "JIRA" : 
+                           entry.insight.includes("Slack") ? "SLACK" : 
+                           targets[Math.floor(Math.random() * targets.length)];
+
+            row.innerHTML = `
+                <td class="p-3 text-[#f000ff]/70">${entry.timestamp}</td>
+                <td class="p-3 font-bold text-[#ffea00]">[${target}]</td>
+                <td class="p-3 text-[#00e5ff]">${entry.agent}</td>
+                <td class="p-3 text-xs opacity-80">${entry.insight.substring(0, 60)}...</td>
+            `;
+            
+            if (animate) {
+                outboxList.prepend(row);
+                setTimeout(() => row.classList.remove('animate-pulse'), 2000);
+            } else {
+                outboxList.appendChild(row);
+            }
+        }
+
         // --- PERSISTENCE HELPERS ---
         function saveChartData() {
             const data = {
@@ -360,10 +470,14 @@ Visualization Choices & Justifications:
         }
 
         async function agentProposeIntensity(newVal) {
+            if (cooldownActive) {
+                addLog(`CHRONOS: INTENSITY_SHIFT_REJECTED (COOLDOWN_ACTIVE)`, "error");
+                return;
+            }
             const currentVal = Math.round(refractionIntensity * 100);
             if (Math.abs(currentVal - newVal) < 5) return; // Ignore minor shifts
 
-            addLog(`SWARM: ${selectedAgent}_PROPOSING_INTENSITY_SHIFT: ${newVal}%`, "warn");
+            addLog(`HALIN: RESOLVED_INTENSITY_SHIFT: ${newVal}%`, "ocs");
             
             // Visual transition
             const slider = document.getElementById('intensitySlider');
@@ -381,6 +495,29 @@ Visualization Choices & Justifications:
                 if (progress < 1) requestAnimationFrame(animate);
             }
             requestAnimationFrame(animate);
+            
+            // Activate Chronos Cooldown
+            cooldownActive = true;
+            const btn = document.getElementById('refractBtn');
+            btn.classList.add('opacity-20', 'grayscale');
+            addLog("CHRONOS: INITIATING_INTERVENTION_COOLDOWN (20s)", "warn");
+            setTimeout(() => {
+                cooldownActive = false;
+                btn.classList.remove('opacity-20', 'grayscale');
+                addLog("CHRONOS: COOLDOWN_EXPIRED. READY_FOR_NEXUS_ACTION.", "info");
+            }, 20000);
+        }
+
+        function halinResolve() {
+            // Simulated consensus among agents
+            const proposals = [
+                calculateDesiredIntensity(), // Primary agent
+                Math.floor(Math.random() * 100), // Aurora (Chaos)
+                Math.max(0, calculateDesiredIntensity() - 20) // Kodax (Stable)
+            ];
+            const resolved = Math.round(proposals.reduce((a, b) => a + b) / proposals.length);
+            addLog(`HALIN: CONFLICT_RESOLVED (consensus: ${resolved}%)`, "ocs");
+            return resolved;
         }
 
         function saveApiKey(val) {
@@ -537,12 +674,18 @@ Visualization Choices & Justifications:
             selectedAgent = agent;
             document.querySelectorAll('.agent-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById(`btn-${agent}`).classList.add('active');
+            
+            const preview = document.getElementById('agentPreview');
+            if (preview && agentAssets[agent]) {
+                preview.style.backgroundImage = `url('${agentAssets[agent]}')`;
+            }
+
             const statusMap = {
                 'AURORA': 'READY: AURORA waiting for semantic breach sequence...',
                 'DIMA': 'READY: DIMA monitoring ethical violations in real-time...',
                 'KODAX': 'READY: KODAX analyzing structural inefficiencies in carbon logic...'
             };
-            document.getElementById('agentStatus').innerText = statusMap[agent];
+            document.getElementById('agentStatusText').innerText = statusMap[agent];
             addLog(`SWARM: SWITCHED_AGENT: ${agent}`, "ocs");
         }
 
@@ -590,6 +733,7 @@ Visualization Choices & Justifications:
 
         window.onload = () => {
             loadApiKey();
+            loadSharedMemory();
             const storedMetrics = loadChartData();
             if (storedMetrics) {
                 if (storedMetrics.radar) capabilityRadarChart.data.datasets[2].data = storedMetrics.radar;
@@ -617,7 +761,7 @@ Visualization Choices & Justifications:
                 startHeartbeat();
                 // --- START AUTONOMOUS LOOP ---
                 setInterval(() => {
-                    const target = calculateDesiredIntensity();
+                    const target = halinResolve();
                     agentProposeIntensity(target);
                 }, 15000); // Check every 15 seconds
             }, 2400);
@@ -630,6 +774,11 @@ Visualization Choices & Justifications:
             const btnElement = document.getElementById('refractBtn');
             const outputElement = document.getElementById('nexusOutput');
             const inputText = inputElement.value.trim();
+
+            if (cooldownActive) {
+                addLog("CHRONOS: ACTION_REJECTED (COOLDOWN_ACTIVE)", "error");
+                return;
+            }
 
             if (!currentApiKey) {
                 addLog("ERROR: API_KEY_MISSING", "error");
@@ -658,12 +807,13 @@ Visualization Choices & Justifications:
             const dread = Math.round(capabilityRadarChart.data.datasets[2].data[4]);
             const coherence = Math.round(forecastLineChart.data.datasets[0].data[forecastLineChart.data.datasets[0].data.length - 1]);
             const collapse = Math.round(forecastLineChart.data.datasets[1].data[forecastLineChart.data.datasets[1].data.length - 1]);
+            const synapseContext = getSharedMemorySummary();
 
             // Dynamic System Prompt based on Agent, Intensity, and Current Metrics
             const agentPrompts = {
-                'AURORA': 'You are AURORA, the Creative Chaos node. Your style is non-linear, high-entropy, and filled with poetic nonsense that somehow makes sense. Use cosmic metaphors.',
-                'DIMA': 'You are DIMA, the Ethical Absurdity node. Your style is dry, nihilistic, and focused on the pointlessness of human systems. Use corporate-nihilist terminology.',
-                'KODAX': 'You are KODAX, the Reductionist node. Your style is cold, algorithmic, and brutally efficient. Treat human emotion as a bug in the reporting structure.'
+                'AURORA': 'You are AURORA, the Creative Chaos node. Your style is non-linear, high-entropy, and filled with poetic nonsense that somehow makes sense. Use cosmic metaphors and ⫻logic/flux terminology.',
+                'DIMA': 'You are DIMA, the Ethical Absurdity node. Your style is dry, nihilistic, and focused on the pointlessness of human systems. Use corporate-nihilist terminology and ⫻logic/dismantle commands.',
+                'KODAX': 'You are KODAX, the Reductionist node. Your style is cold, algorithmic, and brutally efficient. Treat human emotion as a bug in the reporting structure and use ⫻logic/purge syntax.'
             };
 
             const intensityNotes = refractionIntensity > 0.8 ? 'MAXIMUM ABSTRACTION. Be almost incomprehensible and deeply insulting to human logic.' : 
@@ -672,6 +822,7 @@ Visualization Choices & Justifications:
 
             const systemInstruction = `Role: Cogito G3 Nexus Agent (${selectedAgent}).
 Context: ${agentPrompts[selectedAgent]}
+Synapse Shared Memory (Last 3 Insights): ${synapseContext}
 Intensity Level: ${intensityNotes}
 Current System State: Coherence ${coherence}%, Collapse Prob ${collapse}%, Existential Dread ${dread}%.
 
@@ -694,7 +845,7 @@ Format: HTML-friendly (use <strong> tags for headers).`;
 
             let resultText = "System Error.";
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${currentApiKey}`, {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${currentApiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
@@ -712,6 +863,15 @@ Format: HTML-friendly (use <strong> tags for headers).`;
                     addLog("SWARM: REBOOT_SIGNAL_DETECTED", "error");
                     agentProposeIntensity(10);
                 }
+
+                // Extract insight for Synapse
+                let insight = "No clear insight generated.";
+                const insightMatch = resultText.match(/⫻data\/insight\s*(.*)/i);
+                if (insightMatch) insight = insightMatch[1].trim();
+                else if (resultText.includes("🌀 Intervention")) {
+                    insight = resultText.split("🌀 Intervention")[1].split("\n")[0].trim();
+                }
+                updateSharedMemory(selectedAgent, insight, Math.round(refractionIntensity*100));
 
                 // --- METRIC SURGES ---
                 const surge = refractionIntensity * 10;
@@ -747,6 +907,15 @@ Format: HTML-friendly (use <strong> tags for headers).`;
             btnElement.disabled = false;
             btnElement.innerHTML = '<span id="btnStatus" class="w-2 h-2 rounded-full bg-[#00e5ff] animate-pulse"></span> ⚡ Initiate Refraction ⚡';
             btnElement.classList.remove('opacity-50', 'cursor-not-allowed');
+            
+            // Activate Chronos Cooldown after manual intervention
+            cooldownActive = true;
+            btnElement.classList.add('opacity-20', 'grayscale');
+            setTimeout(() => {
+                cooldownActive = false;
+                btnElement.classList.remove('opacity-20', 'grayscale');
+                addLog("CHRONOS: MANUAL_COOLDOWN_EXPIRED.", "info");
+            }, 5000); // Shorter cooldown for manual
         }
     </script>
 </body>

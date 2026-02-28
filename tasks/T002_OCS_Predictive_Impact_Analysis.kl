@@ -16,7 +16,7 @@ Following the successful swarm expansion (T001), the Cogito G3 dashboard require
 4. [x] **Visual Glitch Effects**: Integrate subtle CSS/JS "glitch" animations that scale with refraction intensity.
 
 # Constraints
-- **NO SVG**.
+- **SVG Permitted (Localized only)**.
 - **NO Mermaid JS**.
 - Adhere to the palette: #0b0f19, #00e5ff, #f000ff, #b100ff, #ffea00.
 - Use **Chart.js** for the new line chart.

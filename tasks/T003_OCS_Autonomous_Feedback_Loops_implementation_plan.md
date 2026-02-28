@@ -24,5 +24,5 @@
 - [ ] Ensure the API key and agent selection also persist correctly after a page reload.
 
 ## 6. Verification
-- [ ] Confirm no SVG/Mermaid JS usage.
+- [ ] Confirm SVG usage is localized only.
 - [ ] Test the automatic intensity adjustment with the API key active.

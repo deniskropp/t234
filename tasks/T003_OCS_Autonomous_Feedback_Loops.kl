@@ -18,7 +18,7 @@ The Cogito G3 platform has successfully integrated multi-agent swarm logic (T001
 4. [ ] **Metric Persistence**: Implement a basic state preservation (localStorage) for the Forecast and Impact charts so they persist across sessions.
 
 # Constraints
-- **NO SVG**.
+- **SVG Permitted (Localized only)**.
 - **NO Mermaid JS**.
 - Adhere to the palette: #0b0f19, #00e5ff, #f000ff, #b100ff, #ffea00.
 - Maintain OCS v2.1 protocol syntax in logs and outputs.

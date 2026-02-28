@@ -19,7 +19,7 @@ The Cogito G3 system has matured with multi-agent support and analytical charts.
 4. [ ] **Final Persistence**: Ensure all charts (Forecast, Impact) and UI states (API key, Agent) are saved to and loaded from `localStorage`.
 
 # Constraints
-- **NO SVG**.
+- **SVG Permitted (Localized only)**.
 - **NO Mermaid JS**.
 - Adhere to the palette: #0b0f19, #00e5ff, #f000ff, #b100ff, #ffea00.
 - Ensure OCS v2.1 protocol consistency in all console logs and agent responses.

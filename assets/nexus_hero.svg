@@ -1,0 +1,45 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#0b0f19" />
+  
+  <!-- Central Nexus Node -->
+  <circle cx="400" cy="300" r="80" fill="none" stroke="#00e5ff" stroke-width="4">
+    <animate attributeName="r" values="75;85;75" dur="4s" repeatCount="indefinite" />
+    <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="400" cy="300" r="40" fill="#f000ff" fill-opacity="0.8">
+    <animate attributeName="r" values="35;45;35" dur="2s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Neural Paths -->
+  <g stroke="#00e5ff" stroke-width="2" stroke-opacity="0.3">
+    <line x1="400" y1="220" x2="400" y2="100" />
+    <line x1="400" y1="380" x2="400" y2="500" />
+    <line x1="480" y1="300" x2="650" y2="300" />
+    <line x1="320" y1="300" x2="150" y2="300" />
+    <line x1="456" y1="244" x2="550" y2="150" />
+    <line x1="344" y1="356" x2="250" y2="450" />
+    <line x1="456" y1="356" x2="550" y2="450" />
+    <line x1="344" y1="244" x2="250" y2="150" />
+  </g>
+  
+  <!-- Floating Nodes -->
+  <circle cx="400" cy="100" r="10" fill="#00e5ff" />
+  <circle cx="400" cy="500" r="10" fill="#f000ff" />
+  <circle cx="650" cy="300" r="10" fill="#b100ff" />
+  <circle cx="150" cy="300" r="10" fill="#ffea00" />
+  
+  <!-- OCS Labels -->
+  <text x="410" y="90" fill="#00e5ff" font-family="monospace" font-size="12">⫻cmd/exec</text>
+  <text x="410" y="520" fill="#f000ff" font-family="monospace" font-size="12">⫻data/insight</text>
+  <text x="660" y="310" fill="#b100ff" font-family="monospace" font-size="12">⫻logic/learn</text>
+  <text x="100" y="310" fill="#ffea00" font-family="monospace" font-size="12">⫻data/trace</text>
+  
+  <!-- Grid Pattern overlay -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#00e5ff" stroke-width="0.5" stroke-opacity="0.1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#grid)" />
+</svg>
