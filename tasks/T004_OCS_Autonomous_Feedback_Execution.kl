@@ -1,0 +1,33 @@
+---
+id: T004
+title: Cogito G3: Autonomous Feedback Execution
+author: Gemini CLI
+recipient: Orchestrator
+status: OPEN
+priority: HIGH
+created: 2026-02-28
+handoff: 2026-02-28T18:00:00Z
+---
+
+# Context
+The Cogito G3 system has matured with multi-agent support and analytical charts. The current session has finalized T002 (Predictive Impact) and moved T003 (Autonomous Feedback) into the "IN_PROGRESS" state. This task (T004) serves as the primary execution directive for the next Orchestrator to implement the logic defined in the T003 implementation plan.
+
+# Objectives
+1. [ ] **Implement Self-Adjusting Refraction**: Develop the `calculateDesiredIntensity()` and `agentProposeIntensity()` functions in `index.html`.
+2. [ ] **Update API Call for Context**: Inject real-time metric data (Existential Dread, Coherence) into the `refractSemantics()` prompt.
+3. [ ] **Autonomous Intervention**: Set up the `setInterval` loop to trigger unprompted agent actions when thresholds are breached.
+4. [ ] **Final Persistence**: Ensure all charts (Forecast, Impact) and UI states (API key, Agent) are saved to and loaded from `localStorage`.
+
+# Constraints
+- **NO SVG**.
+- **NO Mermaid JS**.
+- Adhere to the palette: #0b0f19, #00e5ff, #f000ff, #b100ff, #ffea00.
+- Ensure OCS v2.1 protocol consistency in all console logs and agent responses.
+
+# Resources
+- `index.html`
+- `tasks/T003_OCS_Autonomous_Feedback_Loops_implementation_plan.md`
+- `files/ocs-proto.md`
+
+# Handoff Details
+T002 is verified and closed. The UI now handles API keys safely. The next agent should immediately proceed to step 1 of the T003 implementation plan. The system is currently in "Fluid" mode but should transition to "Swarm" or "Predictive" once the feedback loops are active.
