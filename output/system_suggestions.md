@@ -1,6 +1,10 @@
-# System Suggestions - 2026-02-28
+# Cogito G3: System Suggestions & Next Steps
 
-1. **Initiate T007: Quantum Semantic Containment**: Implement more advanced "Semantic Buffer Overflow" recovery mechanisms.
-2. **Deploy OCS v2.2 Schema**: Upgrade the internal JSON state for more complex multi-agent reasoning traces.
-3. **Advanced Swarm Visualization**: Consider a "Swarm Connection Matrix" in `index.html` (using Chart.js Bubble or Scatter) to show inter-agent influence in real-time.
-4. **Nexus Outbox Webhook Proxy**: Create a lightweight backend to actually route "interventions" to external mock APIs.
+## Immediate Priorities
+1. **T010: Nexus Outbox Webhook Proxy**: Transition the current mock Outbox to a functional lightweight middleware (FastAPI/Node) to route interventions to actual sandboxes.
+2. **T007: Quantum Semantic Containment**: Implement the entropy monitoring logic to prevent "Semantic Buffer Overflows" during high-intensity refraction events.
+3. **T009: Swarm Connection Matrix**: Replace or augment the Radar Chart with a multivariate Bubble/Scatter plot to visualize inter-agent semantic divergence.
+
+## Strategic Recommendations
+- **Protocol Upgrade**: Move towards OCS v2.2 to support nested reasoning traces in the Swarm Log.
+- **Existential Feedback**: Enhance the "Halin" resolution logic to incorporate user feedback into the weighted voting system.
