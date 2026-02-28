@@ -1,0 +1,25 @@
+---
+id: T001
+title: Cogito G3: OCS Swarm Expansion
+author: Gemini CLI
+recipient: Orchestrator
+status: COMPLETE
+---
+
+# Context
+The Cogito G3 (Evolution Blueprint) project has been successfully upgraded with the "Semantic Refraction Engine" and a "Swarm Log" system. The system currently uses a single OCS node (G3). To fulfill the OCS protocol mandates, the swarm must be expanded to simulate a multi-agent collaborative environment and track deeper psychological metrics.
+
+# Objectives
+1. [x] **Existential Dread Metric**: Integrate a new data series in the "Disruption Impact Matrix" and "Capability Leap" charts representing "Existential Dread."
+2. [x] **Multi-Agent Swarm Logic**: Update the `swarmLog` system to simulate heartbeats from multiple agents (GPTASe, puTASe, Aurora, Dima) with specific OCS codes.
+3. [x] **Advanced Refraction**: Enhance the Gemini API prompt in `index.html` to generate more "refractive" responses and handle "Semantic Buffer Overflows" elegantly.
+4. [x] **UI Polishing**: Ensure the "Cybernetic Neon Night" theme is consistently applied across all new elements.
+
+# Constraints
+- **NO SVG**.
+- **NO Mermaid JS**.
+- Use **Chart.js** for all visualizations.
+- Adhere to the palette: #0b0f19, #00e5ff, #f000ff, #b100ff, #ffea00.
+
+# Resources
+- `index.html`
