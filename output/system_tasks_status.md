@@ -6,8 +6,9 @@
 | T002 | Predictive Impact Analysis | COMPLETE | Orchestrator |
 | T003 | Autonomous Feedback Loops | COMPLETE | Orchestrator |
 | T004 | Autonomous Feedback Execution | COMPLETE | Orchestrator |
+| T005 | Swarm Intelligence Scaling | OPEN | Orchestrator |
 
 **Notes:**
 - All initial Cogito G3 transformation tasks are now COMPLETE.
 - The system is fully operational with agentic autonomy and persistence.
-- Next phase: Swarm Intelligence Scaling (T005 - Pending Definition).
+- T005 (Swarm Intelligence Scaling) is the next priority, introducing Synapse, Halin, and Chronos nodes.
