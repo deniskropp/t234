@@ -17,5 +17,6 @@ Conceptual single-page visualization for the Cogito G3 agentic transformation.
 - **Charts**: Update Radar, Bar, and Donut configs in the `<script>` section for data changes.
 
 
-## System/Protocol/Prompts/Workflows
+
+# System/Protocol/Prompts/Workflows
 @files/system.md
